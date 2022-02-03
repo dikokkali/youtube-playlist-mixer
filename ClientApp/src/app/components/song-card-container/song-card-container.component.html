@@ -1,0 +1,5 @@
+<div class="d-flex p-2 bd-highlight flex-row song-card-container-main">
+    <div *ngFor="let video of youtubeVideoList; index as i">
+        <app-song-card [embedURL]="video.videoEmbedUrl"></app-song-card>
+    </div>
+</div>

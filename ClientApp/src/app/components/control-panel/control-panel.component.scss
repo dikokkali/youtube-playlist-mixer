@@ -1,0 +1,35 @@
+.control-panel-container {
+    // background: rgb(0,0,0);
+    // background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(51,55,60,1) 50%, rgba(27,28,29,1) 76%, rgba(64,65,66,1) 100%); 
+    border-radius: 10%;
+    
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 40px 0;
+
+    width:25%;
+    
+}
+
+.button-container {
+ justify-content: center; 
+}
+
+.button-circular-large {  
+  
+    border: none;
+    outline: none;   
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.button-circular-large:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}
+
+

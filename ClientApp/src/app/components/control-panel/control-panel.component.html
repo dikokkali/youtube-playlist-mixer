@@ -1,0 +1,8 @@
+<div class="control-panel-container">
+    
+    <!-- <p>Control Panel</p> -->
+    <div class="d-flex p-2 bd-highlight flex-row button-container">
+        <div href="#" [hidden]="isSongPlaying" class="button-circular-large" (click)="onPlayButtonClick()"><i class="bi bi-play-circle"></i></div>
+        <div href="#" [hidden]="!isSongPlaying" class="button-circular-large" (click)="onPauseButtonClick()"><i class="bi bi-pause-circle"></i></div>
+    </div>
+</div>
