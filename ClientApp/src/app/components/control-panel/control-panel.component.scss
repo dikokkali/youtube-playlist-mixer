@@ -32,4 +32,19 @@
    opacity: 0.5;
 }
 
+.button-circular-small {  
+    padding-top:10px;
+    border: none;
+    outline: none;   
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.button-circular-small:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}
+
 

@@ -2,7 +2,9 @@
     
     <!-- <p>Control Panel</p> -->
     <div class="d-flex p-2 bd-highlight flex-row button-container">
+        <div href="#" class="button-circular-small" (click)="onPauseButtonClick()"><i class="bi bi-skip-forward-circle"></i></div>
         <div href="#" [hidden]="isSongPlaying" class="button-circular-large" (click)="onPlayButtonClick()"><i class="bi bi-play-circle"></i></div>
         <div href="#" [hidden]="!isSongPlaying" class="button-circular-large" (click)="onPauseButtonClick()"><i class="bi bi-pause-circle"></i></div>
+        <div href="#" class="button-circular-small" (click)="onPauseButtonClick()"><i class="bi bi-skip-backward-circle"></i></div>     
     </div>
 </div>
