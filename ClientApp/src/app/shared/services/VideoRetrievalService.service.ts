@@ -27,11 +27,17 @@ export class VideoRetrievalService {
             youtubeObject = result;
 
             videoData.videoEmbedUrl = this.createEmbedUrl(youtubeObject.url);
-            videoData.videoTitle = youtubeObject.title;   
+            videoData.videoEmbedId = this.extractYoutubeId(youtubeObject.url);
+            videoData.videoTitle = youtubeObject.title;               
         } );        
     }
 
-    createEmbedUrl(url: string) : string {
+    createEmbedUrl(url: string) : string {    
+
+        return this.embedUrlPrefix + this.extractYoutubeId(url);
+    }
+
+    extractYoutubeId(url: string) : string {
         
         var youtubeId = "";
         var videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
@@ -42,7 +48,7 @@ export class VideoRetrievalService {
             console.log("The youtube url is not valid.");
         }
 
-        return this.embedUrlPrefix + youtubeId;
+        return youtubeId;
     }
 }
 

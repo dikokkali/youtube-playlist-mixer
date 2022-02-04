@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { YoutubeVideoDataViewModel } from 'src/app/shared/models/YoutubeVideoDataViewModel';
 
 @Component({
   selector: 'app-control-panel',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ControlPanelComponent implements OnInit {
 
   isSongPlaying: boolean;
+  
+  armedVideo: YoutubeVideoDataViewModel;
 
   constructor() { 
     this.onPlayButtonClick = this.onPlayButtonClick.bind(this);
@@ -21,6 +24,11 @@ export class ControlPanelComponent implements OnInit {
     this.isSongPlaying = false;
   }
 
+  armVideo(video: YoutubeVideoDataViewModel) {
+    this.armedVideo = video;
+  }
+
+  //#region Control Panel Callbacks
   onPlayButtonClick() {
     this.isSongPlaying = true;
   }
@@ -28,4 +36,5 @@ export class ControlPanelComponent implements OnInit {
   onPauseButtonClick() {
     this.isSongPlaying = false;
   }
+  //#endregion
 }

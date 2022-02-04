@@ -1,9 +1,28 @@
 .song-card-main {  
+    margin-top: 20px;
+    margin-bottom: 20px;
     box-shadow: 5px 5px #888888;   
     width: 500px;   
     flex: right;  
 }
 
-.song-card-videoFrame {
+.song-card-main-small {  
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px #888888;   
+    width: 300px;   
+    flex: right;  
+}
+
+.song-card-videoFrame-regular {
     height: 300px;
+}
+
+.song-card-videoFrame-small {
+    height: 250px;
+}
+
+
+.song-card-videoFrame-xs {
+    height: 200px;
 }

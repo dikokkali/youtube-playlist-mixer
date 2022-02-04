@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { YouTubePlayer } from '@angular/youtube-player';
 import { YoutubeVideoDataViewModel } from 'src/app/shared/models/YoutubeVideoDataViewModel';
 import { FakeDataProviderService } from 'src/app/shared/services/fake-data-provider.service';
 import { VideoRetrievalService } from 'src/app/shared/services/VideoRetrievalService.service';
@@ -9,15 +10,17 @@ import { VideoRetrievalService } from 'src/app/shared/services/VideoRetrievalSer
   styleUrls: ['./song-card-container.component.scss']
 })
 export class SongCardContainerComponent implements OnInit {
+  
 
-  youtubeVideoList: YoutubeVideoDataViewModel[] = [];
+  activeVideoList: YoutubeVideoDataViewModel[] = [];
+  activeVideo: YoutubeVideoDataViewModel;
 
   constructor(private videoRetrievalService: VideoRetrievalService,
               private dataProvider: FakeDataProviderService) { }
 
   ngOnInit(): void {
 
-    this.convertUrlListToData(this.dataProvider.testUrlList);
+    this.convertUrlListToData(this.dataProvider.testUrlList);    
 
   }
 
@@ -27,10 +30,10 @@ export class SongCardContainerComponent implements OnInit {
       let newData = new YoutubeVideoDataViewModel();
 
       this.videoRetrievalService.getVideoDataFromUrl(url, newData);
-      this.youtubeVideoList.push(newData);
+      this.activeVideoList.push(newData);
     })
 
-    console.log(this.youtubeVideoList);
+    console.log(this.activeVideoList);
   }
 
 }

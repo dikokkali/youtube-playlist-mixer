@@ -1,5 +1,5 @@
-<div class="card song-card-main">
-    <iframe class="song-card-videoFrame" [src]="videoEmbedUrl | safe" frameborder="0" allowfullscreen></iframe>
+<div class="card song-card-main">    
+    <youtube-player [videoId]="videoEmbedId" (ready)="onPlayerReady($event)" (stateChange)="onPlayerStateChange($event)" suggestedQuality="highres" [height]="250" [width]="500" [playerVars]="videoPlayerConfig" #youtubePlayer></youtube-player>
     <div class="card-body">      
     </div>
   </div>

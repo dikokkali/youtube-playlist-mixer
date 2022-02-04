@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { VideoRetrievalService } from './shared/services/VideoRetrievalService.service';
 import { SafePipe } from './shared/pipes/SafePipe';
 import { ControlPanelComponent } from './components/control-panel/control-panel.component';
+import { DataSharingService } from './shared/services/data-sharing.service';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { ControlPanelComponent } from './components/control-panel/control-panel.
     BrowserModule,
     AppRoutingModule,  
     HttpClientModule,      
-    NgbModule
+    NgbModule,
+    YouTubePlayerModule
   ],
-  providers: [VideoRetrievalService, HttpClient],
+  providers: [VideoRetrievalService, DataSharingService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
