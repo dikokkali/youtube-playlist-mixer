@@ -8,8 +8,9 @@ import { YouTubePlayer } from '@angular/youtube-player';
 })
 
 export class SongCardComponent implements OnInit, AfterViewInit {
+  @ViewChild('youtubePlayer', {static: true}) YTPlayer : YouTubePlayer;
 
-  YTPlayer: any;
+
   apiLoaded: boolean = false;
   
   public videoLinkUrl: string;    
@@ -36,32 +37,33 @@ export class SongCardComponent implements OnInit, AfterViewInit {
     }
   }  
 
-  ngAfterViewInit() {
-  
+  ngAfterViewInit() { 
+ 
   }
 
-  playSelectedSong() {
+  public playSong() {
+    this.YTPlayer.playVideo();
+  }
 
+  public pauseSong() {
+    this.YTPlayer.pauseVideo();  
   }
 
   //#region Youtube CallBacks
   onPlayerReady(e: any) {
-    console.log(e);
-    // e.target.loadVideoById(this.videoEmbedId);
-    e.target.cueVideoById(this.videoEmbedId);
-    
+    e.target.cueVideoById(this.videoEmbedId);    
   }
 
   onPlayerStateChange(e: any)
   {
     console.log("STATE CHANGE",e);
 
-    if (e.data === 5)
-    {
-      console.log("CUED");
-      e.target.isMuted = true;
-      e.target.playVideo();     
-    }
+    // if (e.data === 5)
+    // {
+    //   console.log("CUED");
+    //   e.target.isMuted = true;
+    //   e.target.playVideo();     
+    // }
   }
  
   //#endregion
