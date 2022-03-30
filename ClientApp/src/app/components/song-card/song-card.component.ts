@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { YouTubePlayer } from '@angular/youtube-player';
+import { DataSharingService } from 'src/app/shared/services/data-sharing.service';
 
 @Component({
   selector: 'app-song-card',
@@ -9,7 +10,6 @@ import { YouTubePlayer } from '@angular/youtube-player';
 
 export class SongCardComponent implements OnInit, AfterViewInit {
   @ViewChild('youtubePlayer', {static: true}) YTPlayer : YouTubePlayer;
-
 
   apiLoaded: boolean = false;
   
@@ -24,7 +24,7 @@ export class SongCardComponent implements OnInit, AfterViewInit {
     autoplay: 0
   }  
 
-  constructor() { this.videoLinkUrl = "https://www.youtube.com/embed/pWahNIMRxR0"; }
+  constructor(private dataService: DataSharingService) { this.videoLinkUrl = "https://www.youtube.com/embed/pWahNIMRxR0"; }
 
   ngOnInit(): void { 
 
@@ -35,6 +35,13 @@ export class SongCardComponent implements OnInit, AfterViewInit {
       document.body.appendChild(tag);
       this.apiLoaded = true;
     }
+
+    this.dataService.playButtonClickedEvent.subscribe(res => {
+      if (res.videoEmbedId == this.videoEmbedId)
+      {
+        this.playSong();
+      }});
+
   }  
 
   ngAfterViewInit() { 
@@ -51,18 +58,15 @@ export class SongCardComponent implements OnInit, AfterViewInit {
 
   //#region Youtube CallBacks
   onPlayerReady(e: any) {
-    e.target.cueVideoById(this.videoEmbedId);    
+
+    e.target.cueVideoById(this.videoEmbedId);  
   }
 
   onPlayerStateChange(e: any)
   {
-    console.log("STATE CHANGE",e);
-
-    // if (e.data === 5)
+    // if (e.data == YT.PlayerState.CUED)
     // {
-    //   console.log("CUED");
-    //   e.target.isMuted = true;
-    //   e.target.playVideo();     
+    //   this.playSong();
     // }
   }
  
