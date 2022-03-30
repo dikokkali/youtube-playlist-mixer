@@ -30,6 +30,10 @@ export class ControlPanelComponent implements OnInit {
     testVideo.videoEmbedUrl = 'https://www.youtube.com/embed/U5rLz5AZBIA';
    
     this.armVideo(testVideo);
+
+    // Subscribe to events
+    this.dataService.songPlayingEvent.subscribe( result => this.isSongPlaying = true);
+    this.dataService.songStoppedEvent.subscribe( result => this.isSongPlaying = false);
   }
 
   initializeControlPanel() {
@@ -45,11 +49,14 @@ export class ControlPanelComponent implements OnInit {
   onPlayButtonClick() {
     
     this.dataService.playClicked();
+    this.isSongPlaying = true;
   }
-  
+
   onPauseButtonClick() {
 
-    this.dataService.pauseClicked();
+    this.dataService.playClicked();
+    this.isSongPlaying = false;
   }
+  
   //#endregion
 }

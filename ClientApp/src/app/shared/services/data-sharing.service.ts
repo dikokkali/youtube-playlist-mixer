@@ -8,7 +8,11 @@ import { YoutubeVideoDataViewModel } from '../models/YoutubeVideoDataViewModel';
 export class DataSharingService {
 
   @Output() playButtonClickedEvent = new EventEmitter<YoutubeVideoDataViewModel>();
-  @Output() pauseButtonClickedEvent = new EventEmitter<YoutubeVideoDataViewModel>();
+
+  @Output() songPlayingEvent = new EventEmitter<boolean>();
+  @Output() songStoppedEvent = new EventEmitter<boolean>();
+
+  // @Output() pauseButtonClickedEvent = new EventEmitter<YoutubeVideoDataViewModel>(); // Not necessary, button is a toggle
 
   public armedVideo: YoutubeVideoDataViewModel;
 
@@ -18,10 +22,4 @@ export class DataSharingService {
 
     this.playButtonClickedEvent.emit(this.armedVideo);
   }
-
-  pauseClicked() {
-
-    this.pauseButtonClickedEvent.emit(this.armedVideo);
-  }
-
 }

@@ -24,29 +24,22 @@ export class SongCardComponent implements OnInit, AfterViewInit {
     autoplay: 0
   }  
 
-  constructor(private dataService: DataSharingService) { this.videoLinkUrl = "https://www.youtube.com/embed/pWahNIMRxR0"; }
+  constructor(private dataService: DataSharingService) 
+  { 
+    this.videoLinkUrl = "https://www.youtube.com/embed/pWahNIMRxR0"; 
+  }
 
-  ngOnInit(): void { 
-
-    if (!this.apiLoaded) {
-
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-      this.apiLoaded = true;
-    }
-
-    this.dataService.playButtonClickedEvent.subscribe(res => {
-      if (res.videoEmbedId == this.videoEmbedId)
-      {
-        this.playSong();
-      }});
-
+  ngOnInit(): void 
+  { 
+    this.InitializeYoutubePlayer();
+    this.SubscribeToEvents();   
   }  
 
   ngAfterViewInit() { 
  
   }
+  
+  //#region Song Card Controls
 
   public playSong() {
     this.YTPlayer.playVideo();
@@ -56,18 +49,59 @@ export class SongCardComponent implements OnInit, AfterViewInit {
     this.YTPlayer.pauseVideo();  
   }
 
-  //#region Youtube CallBacks
-  onPlayerReady(e: any) {
+  //#endregion
 
-    e.target.cueVideoById(this.videoEmbedId);  
+  //#region Song Card Setup
+
+  SubscribeToEvents()
+  {
+    this.dataService.playButtonClickedEvent.subscribe(videoData => this.onControlPanelPlaying(videoData));
+  }
+
+  InitializeYoutubePlayer()
+  {
+    if (!this.apiLoaded) {
+
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      this.apiLoaded = true;
+    }  
+  }
+
+  //#endregion
+
+  //#region Event Callbacks
+
+  onControlPanelPlaying(e: any)
+  {
+    if (e.videoEmbedId == this.videoEmbedId)
+      {        
+        if (this.YTPlayer.getPlayerState() == YT.PlayerState.PLAYING)
+        {
+          this.pauseSong();
+          this.dataService.songStoppedEvent.emit();
+        }
+        else if (this.YTPlayer.getPlayerState() == YT.PlayerState.PAUSED || this.YTPlayer.getPlayerState() == YT.PlayerState.CUED)
+        {
+          this.playSong();
+          this.dataService.songPlayingEvent.emit();
+        }       
+      }
+  }  
+
+  //#endregion
+
+  //#region Youtube Callbacks
+
+  onPlayerReady(e: any) 
+  {
+    //e.target.cueVideoById(this.videoEmbedId);  
   }
 
   onPlayerStateChange(e: any)
   {
-    // if (e.data == YT.PlayerState.CUED)
-    // {
-    //   this.playSong();
-    // }
+    
   }
  
   //#endregion
